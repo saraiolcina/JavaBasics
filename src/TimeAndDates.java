@@ -9,10 +9,22 @@ import java.util.Locale;
 public class TimeAndDates {
 
     public static void main(String[] args) throws ParseException {
-        Current today = new Current();
+        //Date class contains the date when the Date object was created
+        Date today = new Date();
+        System.out.println(today);
+
+        /*If we want to create date objects with specific dates, is better to use Calendar class
+        together with Date class*/
+        Calendar myCalendar= Calendar.getInstance();
+        myCalendar.set(2021,01,01); //set the date
+        Date firstDay = myCalendar.getTime();   //creates the date
+        System.out.println(firstDay);
+
+        /*Using SimpleDateFormat for date formatter, so the Date object can be legible in a String*/
+
+        Current today2 = new Current();
         Create birthday = new Create(1993,03,03);
         Convert change = new Convert("30/06/09");
-        Create birthday2 = new Create(1994,9,03);
     }
 }
 
