@@ -1,4 +1,6 @@
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -11,8 +13,11 @@ public class TimeAndDatesExercises {
         Ex2 date2= new Ex2();
         Ex2 date2_2= new Ex2(2000,2,2,2,2,2);
 
+        //Ex 3. Write a Java program to get the maximum value of the year, month, week, date from the current date of a default calendar.
+        Ex3 date3= new Ex3();
 
-
+        //Ex 32. Write a Java program to calculate your age.
+        Ex32 date32 = new Ex32(1962,04,12);
 
     }
 }
@@ -47,5 +52,27 @@ class Ex2{
         myCalendar.set(Calendar.MINUTE,minute);
         myCalendar.set(Calendar.SECOND, second);
         System.out.println(myCalendar.getTime());
+    }
+}
+
+//Returns maximum/minimum day, hour, minute... from the current date
+class Ex3{
+    public Ex3(){
+        Calendar myCalendar = Calendar.getInstance();
+        int maxYear = myCalendar.getActualMaximum(Calendar.YEAR);
+        int maxDay = myCalendar.getActualMaximum(Calendar.DATE);
+        int maxHour = myCalendar.getActualMaximum(Calendar.HOUR);
+        System.out.println("Maximum year: " + maxYear);
+        System.out.println("Maximum day: " + maxDay);
+        System.out.println("Maximum hour: " + maxHour);
+    }
+}
+
+class Ex32{
+    public Ex32(int year, int month, int day){
+        LocalDate today = LocalDate.now();
+        LocalDate birthday = LocalDate.of(year, month, day);
+        Period difference = Period.between(today, birthday);
+        System.out.println(difference);
     }
 }
