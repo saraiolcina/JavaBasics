@@ -70,31 +70,49 @@ public class RegularExpressions {
         //REPLACEALL
         //Replace all "e" occurrence with h
         System.out.println(input.replaceAll("e","h"));
-        System.out.println(input.replaceAll("\\w","!"));    //replace all words with !*/
+        System.out.println(input.replaceAll("\\w","!"));    //replace all words with !
 
 
         //GROUPING
-        //Using Pattern and Matcher class
-        //Date format: DD/MM/YYYY
-        String input2 ="25/0/2021";
-        Pattern datePattern = Pattern.compile("([0-9]{2}/[0-9]{2}/[0-9]{4})");
-        Matcher dateMatcher = datePattern.matcher(input2);
-        if(dateMatcher.find()){
-            System.out.println("yes");
-        }else{
-            System.out.println("no");
-        }
+        //Using Pattern and Matcher class to check a date
+        Group1 g1= new Group1("03/03/1993");
+        Group1 g2 = new Group1("03031993");
+
+        //Change an input date
+        Group2 g3= new Group2("03/03/1993");
+        Group2 g4 = new Group2("03031993");
 
 
-
-        //FLAGS
-
-
-
-
-
-
-
-
+        //FLAG CASE INSENSITIVE
+        Pattern pattern = Pattern.compile("[A-Z]",Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher("n");
+        System.out.println(matcher.find());     //true
     }
 }
+
+class Group1{
+    public Group1(String inputDate){
+        final String DATE_PATTERN= "(0?[0-9])/(0?[0-9])/((?:19|20)[0-9][0-9])";
+        Pattern datePattern = Pattern.compile(DATE_PATTERN); //Date format: DD/MM/YYYY,
+        Matcher dateMatcher = datePattern.matcher(inputDate);
+        if(dateMatcher.find()){
+            System.out.println("The introduced date is correct");
+        }else{
+            System.out.println("Invalid date");
+        }
+    }
+}
+
+class Group2{
+    public Group2(String inputDate){
+        final String DATE_PATTERN = "(0?[0-9])/(0?[0-9])/((?:19|20)[0-9][0-9])";
+        if (inputDate.matches(DATE_PATTERN)){
+            System.out.println("The introduced date is correct");
+        }
+        else{
+            String newDate= inputDate.replaceFirst("(\\d{2})(\\d{2})(\\d{4})", "$1/$2/$3");
+            System.out.println("correct date: " + newDate);
+        }
+    }
+}
+
